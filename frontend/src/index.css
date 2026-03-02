@@ -1,0 +1,17 @@
+/* basic styling */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.App {
+  padding: 1rem;
+}
+
+.result {
+  white-space: pre-wrap;
+  background: #f7f7f7;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+}
