@@ -5,6 +5,7 @@ function App() {
   const [text, setText] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState('reader'); // "reader" or "history"
 
   // parse the raw string from the API into named sections
   const parseResult = (raw) => {
@@ -42,31 +43,54 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Proofreader POC</h1>
+        <h1>AI Proof Reader</h1>
       </header>
       <div className="container">
         <nav className="sidebar">
           <ul>
             <li>
-              <a href="#">Proofreader</a>
+              <a
+                href="#"
+                className={page === 'reader' ? 'active' : ''}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage('reader');
+                }}
+              >
+                Proof Reader
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className={page === 'history' ? 'active' : ''}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage('history');
+                }}
+              >
+                History
+              </a>
             </li>
           </ul>
         </nav>
         <main className="main-content">
-          <textarea
-            rows={8}
-            cols={60}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Paste text here..."
-          />
-          <br />
-          <button onClick={analyze} disabled={loading}>
-            {loading ? 'Analyzing...' : 'Analyze'}
-          </button>
+          {page === 'reader' ? (
+            <>
+              <textarea
+                rows={8}
+                cols={60}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Paste text here..."
+              />
+              <br />
+              <button onClick={analyze} disabled={loading}>
+                {loading ? 'Analyzing...' : 'Analyze'}
+              </button>
 
-          {result && (
-            <div className="result-sections">
+              {result && (
+                <div className="result-sections">
               {result.error && <p className="error">{result.error}</p>}
               {result.revised && (
                 <section>
@@ -112,6 +136,12 @@ function App() {
                   />
                 </section>
               )}
+            </div>
+              )}
+            </>
+          ) : (
+            <div className="coming-soon">
+              <h2>Coming soon</h2>
             </div>
           )}
         </main>

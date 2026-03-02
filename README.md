@@ -1,6 +1,8 @@
-# Proofreader POC
+# AI Proof Reader
 
 This repository contains a minimal proof‑of‑concept for a text proofreading service.
+
+![alt text](Docs/Front_end.png)
 
 ## Structure
 
@@ -65,5 +67,4 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
 
 * This is the bare minimum working flow: a user pastes text, the front end sends it to `/analyze`,
   the backend calls Gemini via `ai_service.proofread_text` and returns the raw output.
-* The frontend is intentionally barebones
-* Later iterations will add authentication, structured response parsing, and history.
+* Later iterations will add Login, Sign up and history pages, alongside  authentication and Database storage

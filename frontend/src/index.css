@@ -24,13 +24,15 @@ header {
   display: flex;
   flex: 1;
   overflow: hidden;
+  align-items: stretch; /* ensure sidebar and main same height */
 }
 
 .sidebar {
-  background: #ffffff;
-  width: 220px;
-  padding: 1.25rem 1rem;
-  border-right: 1px solid #e0e0e0;
+  background: #434242; /* softer light gray */
+  width: 240px;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.08);
 }
 
 .sidebar ul {
@@ -39,17 +41,42 @@ header {
 }
 
 .sidebar li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .sidebar a {
   text-decoration: none;
-  color: #2a2a2a;
+  color: #fff; /* white text against dark sidebar */
   font-weight: 500;
-  transition: color 0.2s;
+  font-size: 1.3rem; /* even larger font */
+  line-height: 1.6;
+  transition: color 0.2s, background 0.2s;
+  display: block; /* make link fill horizontal space */
+  padding: 0.5rem 0.25rem; /* vertical breathing room */
+  border-radius: 4px;
 }
 
 .sidebar a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* highlight active page */
+.sidebar a.active {
+  color: #fff;
+  font-weight: bold;
+  background: rgba(255,255,255,0.15);
+}
+
+/* simple card for coming soon page */
+.coming-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.coming-soon h2 {
+  font-size: 2rem;
   color: #007acc;
 }
 
