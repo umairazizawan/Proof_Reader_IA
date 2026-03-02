@@ -36,7 +36,8 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
         ```text
         GEMINI_API_KEY=your_key_here
         ```
-     2. The backend will automatically load this value when it starts (thanks to `python-dotenv`).
+        
+     2. The backend will automatically load this value when it starts (thanks to `python-dotenv`) **NOTE:Do not upload your api key on any public service**.
 
    - Start the API server:
      ```powershell
