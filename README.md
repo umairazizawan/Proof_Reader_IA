@@ -23,7 +23,11 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
     │   └── index.css
     └── dist/             
 ```
-
+## Support Platforms
+```
+Windows 11 [TESTED]
+Ubuntu 22-24 [Untested but should be compatible]
+```
 ## Getting started
 
 1. **Python backend**
@@ -36,7 +40,7 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
 
      1. **Add your API from your provider to `.env` at the repository root**. Currently only Gemini-API-keys are supported:
         ```text
-        API_KEY=your_key_here
+        GEMINI_API_KEY=your_key_here
         ```
         
      2. The backend will automatically load this value when it start. **NOTE:Do not upload your api key on any public service**.
@@ -73,3 +77,9 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
   - History pages
   - Authentication
 
+## Troubleshooting
+
+* Incase of Errors please make sure your API_KEY is valid and correctly set in the environment variable using the following command in powershell
+```powershell
+$env:GEMINI_API_KEY
+```
