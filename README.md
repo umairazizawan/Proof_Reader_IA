@@ -1,6 +1,6 @@
 # AI Proof Reader
 
-This repository contains a minimal proof‑of‑concept for a text proofreading service.
+This repository contains a minimal proof‑of‑concept for a text proofreading App.
 
 ![alt text](Docs/Front_end.png)
 
@@ -10,18 +10,18 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
 /
 ├── backend/
 │   ├── app/
-│   │   ├── main.py          # FastAPI server with `/analyze` endpoint
-│   │   ├── ai_service.py     # wrapper for Gemini proofreader call
-│   └── requirements.txt     # Python dependencies
-└── frontend/               # React application
-    ├── package.json         # Node dependencies & scripts
-    ├── vite.config.js       # Vite configuration
-    ├── index.html           # Vite entry point
-    ├── src/                 # React source files
+│   │   ├── main.py         
+│   │   ├── ai_service.py     
+│   └── requirements.txt     
+└── frontend/               
+    ├── package.json         
+    ├── vite.config.js       
+    ├── index.html           
+    ├── src/                 
     │   ├── main.jsx
     │   ├── App.jsx
     │   └── index.css
-    └── dist/                # Build output (generated)
+    └── dist/             
 ```
 
 ## Getting started
@@ -32,20 +32,20 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
      ```powershell
      pip install -r backend/requirements.txt
      ```
-   - Set your Gemini key using a `.env` file (preferred) or environment variable:
+   - Setup API key using a `.env` file (preferred) or environment variable:
 
-     1. **Create a file named `.env` at the repository root** with the following contents:
+     1. **Add your API from your provider to `.env` at the repository root**. Currently only Gemini-API-keys are supported:
         ```text
-        GEMINI_API_KEY=your_key_here
+        API_KEY=your_key_here
         ```
         
-     2. The backend will automatically load this value when it starts (thanks to `python-dotenv`) **NOTE:Do not upload your api key on any public service**.
+     2. The backend will automatically load this value when it start. **NOTE:Do not upload your api key on any public service**.
 
    - Start the API server:
      ```powershell
      uvicorn backend.app.main:app --reload
      ```
-   - The server will serve both the API and the frontend static page at http://localhost:8000/
+   - The server will serve both the API at http://localhost:8000/
 
 2. **React frontend**
 
@@ -53,18 +53,23 @@ This repository contains a minimal proof‑of‑concept for a text proofreading 
      ```powershell
      cd frontend
      npm install      
-     npm run dev      # starts Vite dev server on port 5173
+     npm run dev
      ```
 
    - **Production build**
      ```powershell
      cd frontend
      npm install
-     npm run build    # outputs static files to frontend/dist
+     npm run build
      ```
 
 ## Notes
 
 * This is the bare minimum working flow: a user pastes text, the front end sends it to `/analyze`,
-  the backend calls Gemini via `ai_service.proofread_text` and returns the raw output.
-* Later iterations will add Login, Sign up and history pages, alongside  authentication and Database storage
+  the backend calls Gemini via `ai_service.proofread_text` and returns output.
+* Later iterations will add 
+  - Database storage via MongoDb
+  - Login and Sign up pages
+  - History pages
+  - Authentication
+

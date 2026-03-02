@@ -9,7 +9,7 @@ This document outlines the full-stack architecture for a Proof of Concept (POC) 
 * **Frontend:** React, Tailwind CSS (Styling), Axios (API calls).
 * **Backend:** FastAPI (Python 3.10+), Pydantic (Validation).
 * **Database:** MongoDB (via `motor` for async support).
-* **AI:** Google Gemini 2.5 Flash-Lite Free tier (via `google-genai` SDK).
+* **AI:** Google Gemini 2.5 Flash-Lite Free tier.
 * **Auth:** JWT (JSON Web Tokens) with password hashing.
 
 ---
