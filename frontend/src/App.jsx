@@ -6,6 +6,17 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // parse the raw string from the API into named sections
+  const parseResult = (raw) => {
+    const sections = {};
+    const regex = /(REVISED|CHANGES|Theme|Tips):\s*([\s\S]*?)(?=(?:REVISED|CHANGES|Theme|Tips):|$)/g;
+    let match;
+    while ((match = regex.exec(raw))) {
+      sections[match[1].toLowerCase()] = match[2].trim();
+    }
+    return sections;
+  };
+
   const analyze = async () => {
     setLoading(true);
     try {
@@ -15,7 +26,11 @@ function App() {
         body: JSON.stringify({ text }),
       });
       const data = await resp.json();
-      setResult(data);
+      if (data.result) {
+        setResult(parseResult(data.result));
+      } else {
+        setResult({ error: 'Invalid response from server' });
+      }
     } catch (err) {
       console.error(err);
       setResult({ error: 'Request failed' });
@@ -26,22 +41,81 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Proofreader POC</h1>
-      <textarea
-        rows={10}
-        cols={60}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <br />
-      <button onClick={analyze} disabled={loading}>
-        {loading ? 'Analyzing...' : 'Analyze'}
-      </button>
-      {result && (
-        <pre className="result">
-          {JSON.stringify(result, null, 2)}
-        </pre>
-      )}
+      <header>
+        <h1>Proofreader POC</h1>
+      </header>
+      <div className="container">
+        <nav className="sidebar">
+          <ul>
+            <li>
+              <a href="#">Proofreader</a>
+            </li>
+          </ul>
+        </nav>
+        <main className="main-content">
+          <textarea
+            rows={8}
+            cols={60}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Paste text here..."
+          />
+          <br />
+          <button onClick={analyze} disabled={loading}>
+            {loading ? 'Analyzing...' : 'Analyze'}
+          </button>
+
+          {result && (
+            <div className="result-sections">
+              {result.error && <p className="error">{result.error}</p>}
+              {result.revised && (
+                <section>
+                  <h2>Revised</h2>
+                  <textarea
+                    readOnly
+                    rows={4}
+                    cols={60}
+                    value={result.revised}
+                  />
+                </section>
+              )}
+              {result.changes && (
+                <section>
+                  <h2>Changes</h2>
+                  <textarea
+                    readOnly
+                    rows={4}
+                    cols={60}
+                    value={result.changes}
+                  />
+                </section>
+              )}
+              {result.theme && (
+                <section>
+                  <h2>Theme</h2>
+                  <textarea
+                    readOnly
+                    rows={2}
+                    cols={60}
+                    value={result.theme}
+                  />
+                </section>
+              )}
+              {result.tips && (
+                <section>
+                  <h2>Tips</h2>
+                  <textarea
+                    readOnly
+                    rows={3}
+                    cols={60}
+                    value={result.tips}
+                  />
+                </section>
+              )}
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
